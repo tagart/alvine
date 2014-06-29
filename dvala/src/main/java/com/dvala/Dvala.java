@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.RequestContextHolder;
-import redis.clients.jedis.Jedis;
+//import redis.clients.jedis.Jedis;
 
 /**
  *
@@ -32,7 +32,7 @@ import redis.clients.jedis.Jedis;
 //@HttpConstraint(transportGuarantee = ServletSecurity.TransportGuarantee.NONE,rolesAllowed={"admin"}))
 @Controller
 public class Dvala {
-    Jedis jedis = new Jedis("localhost");
+    //Jedis jedis = new Jedis("localhost");
     @RequestMapping(value = "/dvala")
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
