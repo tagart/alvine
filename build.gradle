@@ -1,0 +1,62 @@
+import org.gradle.api.artifacts.*
+
+apply plugin: 'java'
+apply plugin: 'base' // To add "clean" task to the root project.
+apply plugin: 'ear'
+apply plugin: 'cargo'
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-cargo-plugin:1.5'
+    }
+}
+
+repositories {
+    jcenter()
+    flatDir {
+        dirs 'C:\\glassfish4\\glassfish\\modules'
+    }
+}
+
+subprojects {
+    apply from: rootProject.file('common.gradle')
+}
+
+task mergedJavadoc(type: Javadoc, description: 'Creates Javadoc from all the projects.') {
+    title = 'All modules'
+    destinationDir = new File(project.buildDir, 'merged-javadoc')
+
+    // Note: The closures below are executed lazily.
+    source {
+       subprojects*.sourceSets*.main*.allSource
+    }
+    classpath.from {
+        subprojects*.configurations*.compile*.copyRecursive({ !(it instanceof ProjectDependency); })*.resolve()
+    }
+}
+
+task wrapper(type: Wrapper, description: 'Creates and deploys the Gradle wrapper to the current directory.') {
+    gradleVersion = '1.11'
+}
+
+dependencies {
+    def cargoVersion = '1.4.5'
+    cargo name: 'deployment-client'
+    cargo "org.codehaus.cargo:cargo-core-uberjar:$cargoVersion","org.codehaus.cargo:cargo-ant:$cargoVersion"
+    deploy project(':malin')
+    deploy project(path:':dvala', configuration:'archives')
+}
+
+cargo {
+    containerId = 'glassfish4x'
+    remote {
+        hostname = '54.228.89.186'
+        username = 'admin'
+        password = 'p1kad0Ry'
+    }
+    
+}

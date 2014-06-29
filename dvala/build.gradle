@@ -1,0 +1,40 @@
+apply plugin: 'java'
+apply plugin: 'war'
+
+// 
+// // Note: "common.gradle" in the root project contains additional initialization
+//   for this project. This initialization is applied in the "build.gradle"
+//   of the root project.
+
+// NetBeans will automatically add "run" and "debug" tasks relying on the
+// "mainClass" property. You may however define the property prior executing
+// tasks by passing a "-PmainClass=<QUALIFIED_CLASS_NAME>" argument.
+//
+// Note however, that you may define your own "run" and "debug" task if you
+// prefer. In this case NetBeans will not add these tasks but you may rely on
+// your own implementation.
+if (!hasProperty('mainClass')) {
+    ext.mainClass = ''
+}
+
+dependencies {
+    providedCompile 'javax:javaee-web-api:7.0'
+    providedCompile(project(":malin"))
+    compile 'org.springframework.security:spring-security-web:4.0.0.M1'
+    compile 'org.springframework.security:spring-security-config:4.0.0.M1'
+    compile 'org.springframework:spring-webmvc:4.0.5.RELEASE'
+}
+
+jar {
+    enabled = false
+}
+
+sourcesJar {
+    enabled = false
+}
+
+repositories {
+    maven {
+        url 'http://repo.spring.io/milestone'
+    }
+}
