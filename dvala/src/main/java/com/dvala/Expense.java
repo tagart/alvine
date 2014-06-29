@@ -19,4 +19,7 @@ class Expense {
         id = UUID.randomUUID();
         this.name = name;
     }
+    String getName() {
+        return name;
+    }
 }
