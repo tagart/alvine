@@ -57,5 +57,4 @@ cargo {
         username = 'admin'
         password = 'p1kad0Ry'
     }
-    
 }
