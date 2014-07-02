@@ -56,5 +56,8 @@ cargo {
         hostname = '54.228.89.186'
         username = 'admin'
         password = 'p1kad0Ry'
+        containerProperties {
+            property 'cargo.glassfish.admin.port', 443
+        }
     }
 }

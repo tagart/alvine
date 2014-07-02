@@ -24,7 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 
 @RestController
 public class Dvala {
-    @RequestMapping(value = "/expense")
+    @RequestMapping(value = "/expense_")
     public String expense(@RequestParam(value="name",required=true) String name) {
         return new Expense(name).getName();
     }
