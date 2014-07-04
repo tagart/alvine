@@ -42,10 +42,12 @@ public class AppConfig {
         return new Rest();
     }
     
+    
     @Bean
     public Dvala dvala() {
         return new Dvala();
     }
+    
     
     @Bean(name="redisTemplate")
     public RedisTemplate<String,String> getRedisTemplate() {

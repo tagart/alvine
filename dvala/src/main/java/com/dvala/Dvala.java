@@ -24,9 +24,14 @@ public class Dvala {
     //public void addLink(String userId,URL url) {
     //    listOps.leftPush(userId, url.toExternalForm());
     //}
-    @RequestMapping(value = "/expense_")
+    @RequestMapping(value = "/expense")
     public String expense(@RequestParam(value="name",required=true) String name) {
-        listOps.leftPush("Hi", "Hello");
-        return new Expense(name).getName();
+        listOps.leftPush("Hi", name);
+        //return new Expense(name).getName();
+        StringBuilder st_ = new StringBuilder();
+        for(String st: listOps.range("Hi", 0, -1)) {
+            st_.append("<p>"+st+"</p>");
+        }
+        return st_.toString();
     }
 }
